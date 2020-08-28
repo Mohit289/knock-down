@@ -15,7 +15,7 @@ var block13
 var block14
 var block15
 var block16
-
+var score
 var polygon
 function setup() {
   createCanvas(800,400);
@@ -47,5 +47,37 @@ function setup() {
 
 function draw() {
   background(255,255,255);  
+  Text("SCORE:"+score,750,40);
+  blocks1.score();
+  blocks2.score();
+  blocks3.score();
+  blocks4.score();
+  blocks5.score();
+  blocks6.score();
+  blocks7.score();
+  blocks8.score();
+  blocks9.score();
+
   drawSprites();
+}
+
+function keyPressed(){
+  if(keyCode===32){
+      slingshot.attach(polygon.body);
+  }
+}
+
+async function getBackgroundImg(){
+  var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
+  var responseJSON = await response.json();
+
+  var datetime = responseJSON.datetime;
+  var hour = datetime.slice(11,13);
+  
+  if(hour>=16 && hour<=19){
+    background(255,255,255);  
+  }
+  else{
+    background(0,0,0);
+  }
 }
